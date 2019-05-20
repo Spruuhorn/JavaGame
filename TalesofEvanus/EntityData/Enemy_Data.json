@@ -1,0 +1,42 @@
+{
+	"Enemies": 
+	[
+		{
+			"Name":   "Bat",
+			"Sprite": "Bat",
+			"Health": "6",
+			"Speed":  "4",
+			"Attack": "1",
+			"XP":     "5"
+		},
+		
+		{
+			"Name":   "Snail",
+			"Sprite": "",
+			"Health": "3",
+			"Speed":  "1",
+			"Attack": "2",
+			"XP":     "3"
+		},
+		
+		{
+			"Name":   "Slime",
+			"Sprite": "",
+			"Health": "3",
+			"Speed":  "3",
+			"Attack": "1",
+			"XP":     "5"
+		},
+		
+		{
+			"Name":   "Mushroom",
+			"Sprite": "",
+			"Health": "5",
+			"Speed":  "2",
+			"Attack": "3"
+			"XP":     "8"	
+		}
+		
+	]
+		
+}

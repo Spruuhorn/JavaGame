@@ -1,0 +1,22 @@
+{
+	"testMap1": 
+	[
+		{ "map":"testMap3", "name":"northExit", "portalDestination":"southWestExit"},
+		
+		{ "map":"testMap2", "name":"eastExit", "portalDestination":"westExit"},
+	],
+	
+	"testMap2": 
+	[
+		{ "map":"testMap3", "name":"northWestExit", "portalDestination":"southEastExit" },
+	
+		{ "map":"testMap1", "name":"westExit", "portalDestination":"eastExit" },
+	],
+	
+	"testMap3": 
+	[
+		{ "map":"testMap1", "name":"southWestExit", "portalDestination":"northExit"},
+		
+		{ "map":"testMap2", "name":"southEastExit", "portalDestination":"northWestExit"},
+	],
+}

@@ -1,0 +1,59 @@
+{
+	"comment_a":"Red array represents objects that have colliders and are impassable."
+	"red":
+	[
+		{
+			"id":"135",
+			"png":"tree"
+			"hitbox":["36","116","52","12"],
+		}
+		
+		{
+			"id":"250",
+			"png":"House1"
+			"hitbox":["16","124","224","60"],
+		}
+		
+		{
+			"id":"100",
+			"png":"treeBarrier"
+			"hitbox":["0","64","128","124"],
+		}
+		
+		{
+			"id":"150",
+			"png":"bush"
+			"hitbox":["4","52","56","12"],
+		}
+	],
+		
+	"comment_b":"Green array represents objects that do not have colliders and are passable."
+	"green":
+	[
+		{
+			"id":"1",
+			"png":"grass"
+		}
+		
+		{
+			"id":"250",
+			"png":"flowers"
+		}
+		
+		{
+			"id":"3",
+			"png":"Floor"
+		}
+		
+		{
+			"id":"200",
+			"png":"grassleaves"
+		}
+	],
+	
+	"comment_c":"Blue array represents objects that have colliders, but are passable."
+	"blue":
+	[
+	
+	],
+}
