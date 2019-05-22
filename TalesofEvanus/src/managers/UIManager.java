@@ -63,7 +63,6 @@ public class UIManager {
 		
 		Animation animatedSprite = new Animation(sheet, 100);
 		
-		int counter = 0;
 		for(int i = 0; i < 9; i++ ) {
 			nineSlices.add(animatedSprite.getImage(i));
 		}
