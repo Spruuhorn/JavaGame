@@ -6,7 +6,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class TalesOfEvanusLauncher extends StateBasedGame{
 
-	public static int width = 1280, height = 720;
+	public static int width = 1600, height = 1000;
 	public static final String gameName = "Tales of Evanus";
 	public static final int main = 0;
 	

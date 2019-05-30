@@ -1,5 +1,6 @@
 package gui;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.newdawn.slick.Image;
@@ -8,7 +9,7 @@ import org.newdawn.slick.Renderable;
 import entities.GameObject;
 
 public class NineSlicedGUI extends GameObject {
-	
+
 	public static final int TOP_LEFT = 0;
 	public static final int TOP_MID = 1;
 	public static final int TOP_RIGHT = 2;
@@ -23,19 +24,20 @@ public class NineSlicedGUI extends GameObject {
 	private Image[] slices;
 	private Set<Slice> setOfSlices;
 	
+	{
+		setOfSlices = new HashSet<>();
+	}
+	
 	private class Slice extends GameObject {
 
-		public Slice(int x, int y) {
-			super(x, y);
-			// TODO Auto-generated constructor stub
-		}
-
-		@Override
-		public void update() {
-			// TODO Auto-generated method stub
-			
+		public Slice(int x, int y, Image image) {
+			super(x, y, image);
 		}
 		
+		@Override
+		public void update() {
+			
+		}
 	}
 	
 	public NineSlicedGUI(int x, int y, int width, int height, Renderable toSlice) {
@@ -45,9 +47,15 @@ public class NineSlicedGUI extends GameObject {
 			this.slices = NineSlicer.slice(image);
 			double sliceWidth = image.getWidth()/3;
 			double sliceHeight = image.getHeight()/3;
-			this.rows = (int) ((height/sliceHeight) % 1 == 0? height/sliceHeight : (height/sliceHeight) + 1);
-			this.cols = (int) ((height/sliceWidth) % 1 == 0? height/sliceWidth : (height/sliceWidth) + 1);
-			System.out.println("Sliced " + rows + " " + cols);
+			this.rows = (int) ((height/sliceHeight) % 1 == 0? height/sliceHeight : (height/sliceHeight) + 1); // Check for height overflow
+			this.cols = (int) ((width/sliceWidth) % 1 == 0? width/sliceWidth : (width/sliceWidth) + 1); // Check for width overflow
+			
+			for(int row = 0; row < rows; row++) {
+				for(int col = 0; col < cols; col++) {
+					Slice slice = new Slice((int)((col * sliceWidth) - (x + (cols * sliceWidth))), (int) ((row * sliceHeight) - (y + (rows * sliceHeight))), getNineSliceTile(row, col));
+					setOfSlices.add(slice);
+				}
+			}
 		}
 	}
 	
@@ -58,6 +66,14 @@ public class NineSlicedGUI extends GameObject {
 	@Override
 	public void update() {
 		
+	}
+	
+	@Override
+	public void remove() {
+		for(Slice slice: setOfSlices) {
+			slice.remove();
+		}
+		GameObject.GAMEOBJECTS.remove(this);
 	}
 	
 	private Image getNineSliceTile(int row, int col) {

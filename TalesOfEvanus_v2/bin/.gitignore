@@ -1,6 +1,4 @@
-/gui/
 /scene/
-/entities.class
+/gui/
 /entities/
-/interfaces/
-/managers/
+/util/

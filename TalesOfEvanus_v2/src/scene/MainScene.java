@@ -5,6 +5,7 @@ import java.util.Iterator;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Line;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -14,6 +15,7 @@ import entities.GameObject;
 import gui.InventoryGUI;
 import gui.NineSlicedGUI;
 import managers.AssetManager;
+import util.ShapeDrawer;
 
 public class MainScene extends BasicGameState {
 	
@@ -26,7 +28,7 @@ public class MainScene extends BasicGameState {
 		
 		//gc.setShowFPS(false);
 		Camera c = new Camera(0, 0, TalesOfEvanusLauncher.width, TalesOfEvanusLauncher.height);
-		NineSlicedGUI gui = new NineSlicedGUI(0, 0, 240, 250, AssetManager.sprites.get("inventoryNineSlice"));
+		NineSlicedGUI gui = new NineSlicedGUI(0, 0, 40, 40, AssetManager.sprites.get("inventoryNineSlice"));
 		//GameObject test = new BasicObject(0, 0, AssetManager.sprites.get("GodBlessThisImage"));
 		
 	}
@@ -38,6 +40,24 @@ public class MainScene extends BasicGameState {
 			if(object.isDrawable()) {
 				object.draw();
 			}
+		}
+		
+		/**************************
+		 * Need to draw GUI on	  *
+		 * a different loop after *
+		 * rendering gameobjects  * 
+		 **************************/
+		
+		/*
+		for(GUIObject object : GameObject.GAMEOBJECTS) {
+			if(object.isDrawable()) {
+				object.draw();
+			}
+		}
+		*/
+		
+		for(Line line : ShapeDrawer.grid) {
+			g.draw(line);
 		}
 		
 	}

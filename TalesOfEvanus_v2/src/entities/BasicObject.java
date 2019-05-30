@@ -6,7 +6,6 @@ public class BasicObject extends GameObject {
 
 	public BasicObject(int x, int y, Renderable sprite) {
 		super(x, y, sprite);
-		System.out.println(x + " , " + y);
 	}
 
 	@Override

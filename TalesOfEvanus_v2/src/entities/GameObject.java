@@ -56,6 +56,10 @@ public abstract class GameObject {
 		}
 	}
 	
+	public void remove() {
+		GameObject.GAMEOBJECTS.remove(this);
+	}
+	
 	public boolean isColliding(Shape other) {
 		return collider.intersects(other);
 	}
