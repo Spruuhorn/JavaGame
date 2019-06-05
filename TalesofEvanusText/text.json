@@ -1,0 +1,410 @@
+{	
+	"comment":     "Do not exceed col 245 This comment demonstrates the line of text that could be suitable in one text window Thousands of people choke every year while eating, and hundreds of those people die. That's why I don't feed my kids. This comment demonstrates the line of text."
+	"blank":       "                                   "
+	"opening": 
+	[
+		{ 
+			"type":"textbox", 
+			"text":"In a far ... far ... far away land, in a distant ... distant time, stands the lands of Evanus. ", 
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"Continue", 
+			"path":"opening1"
+		},
+	],
+	
+	"opening1": 
+	[
+		{ 
+			"type":"textbox", 
+			"text":"The land is a vast and diverse. To the east stands the Adi Mountains, and the Mountains of Luca to the west cast a grand shadow on the Plains of Gerardion when the sun sets just below the horizon. The grass here grows tall- tall enough to swallow an elephant among its foliage.", 
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"Continue", 
+			"path":"opening2"
+		},
+	]
+	
+	"opening2": 
+	[
+		{ 
+			"type":"textbox", 
+			"text":"In the fall, the great Elk Wino trees of the Simonion Forest to the south shed their leaves in a torrent of flaming leaves. In the north, the Flint Frostlands, a barren waste becoming colder each decade, preserves the bodies of thousands of explorers and soldiers.", 
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"Continue", 
+			"path":"opening3"
+		},
+	]
+	
+	"opening3": 
+	[
+		{ 
+			"type":"textbox", 
+			"text":"In the middle of these sights of awe, rests an ordinary town. The town of Bold Ridge, home to only several dozen humble Evanians, was set up as a trade outpost for settlers exploring beyond the Mountains of Adi Luca. But now, it rarely sees much traffic anymore...", 
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"Continue", 
+			"path":"opening4"
+		},
+	]
+	
+	"opening4": 
+	[
+		{ 
+			"type":"textbox", 
+			"text":"The cursed, bitter winter raises the fallen bodies of the frostlands, who seek revenge on the townspeople for abandoning them. The town's remaining and most capable are preparing for another exhausting war.", 
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"Continue", 
+			"path":"intro1"
+		},
+	]
+	
+	"intro1": 
+	[
+		{ 
+			"type":"textbox", 
+			"text":"In a modest stone hut, you watch as your parents practice archery in the range.                                   You ask your sister, \"Yuwa, Why can't I go help mom and dad fight those bad guys?\"                        Your sister responds, \"You can barely hold a sword, what makes you think you can help them? You might as well chop their arm off!\"", 
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"\"Maybe I'll just chop your arm off!\"", 
+			"path":"intro2"
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"*Glare at your sister*", 
+			"path":"intro2a"
+		},
+	]
+	
+	"intro2a": 
+	[
+		{ 
+			"type":"textbox", 
+			"text":"\"Oh no, did I make you mad?\" She says sarcastically                       	\"wow, would you look at the sun dial, it's time to run those errands mom was talking about!\"                      	With that, she leaves the house. You start to feel hungry.", 
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"Go outside", 
+			"path":"talkToParents"
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"Look for something to eat", 
+			"path":"lookAtCookingPot"
+		},
+	]
+	
+	"intro2": 
+	[
+		{ 
+			"type":"textbox", 
+			"text":"She laughs, \"I would love to see you try! Just make sure you don't cut yours off too.\"                                    As she laughs more to herself, she leaves the house. As you watch her leave, you feek your stomach rumble. You begin to feel hungry.", 
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"Go outside", 
+			"path":"talkToParents"
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"Look for something to eat", 
+			"path":"lookAtCookingPot"
+		},
+	]
+	
+	"lookAtCookingPot": 
+	[
+		{ 
+			"type":"textbox", 
+			"text":"You step over to the cooking pot hanging within a cold fire place. Sitting in the pot is some stew that your mother cooked for supper. Hytai root stew with Singeng leaves. Not your favorite, but it can't be that bad considering how hungry you are, right?", 
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"Drink stew", 
+			"path":"drinkStew"
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"Go outside", 
+			"path":"talkToParents"
+		},
+	]
+	
+	"drinkStew": 
+	[
+		{ 
+			"type":"textbox", 
+			"text":"You grab a wooden spoon hanging from the shelf and scoop up some stew to drink. You lift the spoon up to your mouth and drink some, and almost immediately feel sick... Who knew soup made from stuff buried beneath the cold earth could taste so bad.                                                 I certainly won't be drinking that again, you think to yourself as you shake off the dizzying sickness.", 
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"Go outside", 
+			"path":"talkToParents"
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"Drink again", 
+			"path":"drinkMoreStew"
+		},
+	]
+	
+	"drinkMoreStew": 
+	[
+		{ 
+			"type":"textbox", 
+			"text":"As you think about how awful the soup was, you realize again that you are really ... really hungry. One more sip couldn't hurt.                                   But it do.", 
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"Continue", 
+			"path":"drinkMoreStew2"
+		},
+	]
+	
+	"drinkMoreStew2": 
+	[
+		{ 
+			"type":"textbox", 
+			"text":"Taking another sip of the soup, you feel like you will surely vomit... Maybe some fresh air will help. ", 
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"Go outside", 
+			"path":"talkToParents"
+		},
+	]
+	
+	"talkToParents": 
+	[
+		{ 
+			"type":"textbox", 
+			"text":"You step outside into the cold, dry air. You see your breath leave your mouth. The sun is up, but it is powerless against the steady wind. You walk around back where your parents are sitting beside a bale of hay. They are whispering to each other, but stop and turn to look at you as they see you appraoch. They smile up at you.", 
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"Continue", 
+			"path":"talkToParents2"
+		},
+	]
+	
+	"talkToParents2": 
+	[
+		{ 
+			"type":"textbox", 
+			"text":"Your mother is the first to speak.        \"Oro! ... Good morning! What are you doing out here? It's cold out, where is your jacket? Did you sleep well? Where is-\"", 
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"\"I slept fine.\"", 
+			"path":"talkToParents2a"
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"\"I'm not cold.\"", 
+			"path":"talkToParents2a"
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"\"I want to learn how to fight\"", 
+			"path":"talkToParents2b"
+		},
+	]
+	
+	"talkToParents2a": 
+	[
+		{ 
+			"type":"textbox", 
+			"text":"Oh, well... Maybe your hungry? I made some soup this morning that I can heat up for you if you would like. It's - I know it isn't your favorite- but it's all we have for the winter. Maybe if the market has some fruits, I can -", 
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"\"I want to learn how to fight like you.", 
+			"path":"talkToParents2b"
+		},
+	]
+	
+	"talkToParents2b": 
+	[
+		{ 
+			"type":"textbox", 
+			"text":"Shocked, your mother stops speaking abruptly and glances at your father. Your father glances over at you for a moment, then gazes forward again. Your mother looks back at you and says \"Oro... When you're... It's too dangerous for a young boy such as yourself to be fighting and killing...\"                               Her voice trails off.", 
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"\"I'm not young!\"", 
+			"path":"talkToParents3a"
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"\"If Yuwa can fight, I can too!\"", 
+			"path":""
+		},
+	]
+	
+	"talkToParents3a": 
+	[
+		{ 
+			"type":"textbox", 
+			"text":"", 
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"\"I wanted to help you guys ", 
+			"path":""
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"\"", 
+			"path":""
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"\"", 
+			"path":""
+		},
+	]
+	
+	"chapter1End": 
+	[
+		{ 
+			"type":"textbox", 
+			"text":"As you stand silently next your father, the sun sets behind the Adi Mountains. He prepares another arrow and fires. Bullseye. He lets off a deep sigh.                                 ", 
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"\"Dad, will I be able to fight like you some day?\"", 
+			"path":"chapter1End2a"
+		},
+		
+				{ 
+			"type":"option", 
+			"text":"...", 
+			"path":"chapter1End2b"
+		},
+	]
+	
+	"chapter1End2a": 
+	[
+		{ 
+			"type":"textbox", 
+			"text":"After a brief pause, his eyes fixed down the range, he replies, \"Of course, Oro... One day ... But I hope that day is not too soon.\"                                                  ", 
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"Continue", 
+			"path":"chapter1End3"
+		},
+	]
+	
+	"chapter1End2b": 
+	[
+		{ 
+			"type":"textbox", 
+			"text":"As your father is about to draw another arrow from his quiver, he pauses and turns to you with a reassuring smile.                                He says to you, \"Oro, one day you will become strong enough to protect this village.", 
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"\"Do you really think so?\"", 
+			"path":"chapter1End3"
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"...", 
+			"path":"chapter1End3"
+		},
+	]	
+	
+	"chapter1End3": 
+	[
+		{ 
+			"type":"textbox", 
+			"text":"Your father fires another arrow. Another bullseye, straight through the first arrow. You continue to watch your father, until the sun's beams are completely blocked out by the distant mountains. Then, you feel a speck of snow fall on your nose. You and your father look up at the same time. Your father turns to you and says, \"C'mon, lets get inside.\"", 
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"Continue", 
+			"path":""
+		},
+	]	
+	
+	"cahpter2opening": 
+	[
+		{ 
+			"type":"textbox", 
+			"text":"Ten days later...					", 
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"", 
+			"path":""
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"", 
+			"path":""
+		},
+	]
+	
+	"": 
+	[
+		{ 
+			"type":"textbox", 
+			"text":"", 
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"", 
+			"path":""
+		},
+		
+		{ 
+			"type":"option", 
+			"text":"", 
+			"path":""
+		},
+	]
+	
+}
