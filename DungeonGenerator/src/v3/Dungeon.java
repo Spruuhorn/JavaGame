@@ -16,6 +16,7 @@ public class Dungeon {
 	
 	private Set<Room> rooms;
 	private String[][] vertices;
+	private String[][] centers;
 	
 	private int width, height;
 	
@@ -32,8 +33,6 @@ public class Dungeon {
 				vertices[x][y] = "[ ]";
 			}
 		}
-		
-		
 		
 		Random r = new Random();
 		

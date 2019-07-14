@@ -11,6 +11,7 @@ public class Dungeon {
 	
 	private Set<Room> rooms;
 	private String[][] vertices;
+	private int[] centers;
 	
 	private int width, height;
 	
@@ -35,6 +36,7 @@ public class Dungeon {
 			Random r = new Random();
 			
 			int failCounter = 0;
+			int centerCounter = 0;
 			
 			while(failCounter < 50) {
 				
@@ -44,8 +46,14 @@ public class Dungeon {
 				y = r.nextInt(height - 2) + 1;
 				
 				if(roomFits(x, y, w, h)) {
+					
 					Room room = new Room(this, x, y, w, h);
 					rooms.add(room);
+					
+					centerCounter++;
+					centers[centerCounter] = x;
+					centers[centerCounter] = y;
+					
 					break;
 				}
 				failCounter++;

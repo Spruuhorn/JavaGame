@@ -2,6 +2,7 @@ package scene;
 
 import java.util.Iterator;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -14,7 +15,11 @@ import entities.Camera;
 import entities.GameObject;
 import gui.InventoryGUI;
 import gui.NineSlicedGUI;
+import interfaces.Clickable;
+import interfaces.Drawable;
+import interfaces.Hoverable;
 import managers.AssetManager;
+import managers.InputManager;
 import util.ShapeDrawer;
 
 public class MainScene extends BasicGameState {
@@ -28,17 +33,18 @@ public class MainScene extends BasicGameState {
 		
 		//gc.setShowFPS(false);
 		Camera c = new Camera(0, 0, TalesOfEvanusLauncher.width, TalesOfEvanusLauncher.height);
-		NineSlicedGUI gui = new NineSlicedGUI(0, 0, 40, 40, AssetManager.sprites.get("inventoryNineSlice"));
-		//GameObject test = new BasicObject(0, 0, AssetManager.sprites.get("GodBlessThisImage"));
-		
+		//NineSlicedGUI gui = new NineSlicedGUI(0, 0, 235, 425, AssetManager.sprites.get("inventoryNineSlice"));
+		GameObject test = new BasicObject(0, 0, AssetManager.sprites.get("6PlayerRunLeft"));
+		//InventoryGUI invGUI = new InventoryGUI(0,0);
+		InputManager.create(gc.getInput());
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		
 		for(GameObject object : GameObject.GAMEOBJECTS) {
-			if(object.isDrawable()) {
-				object.draw();
+			if(object instanceof Drawable) {
+				((Drawable) object).onDraw();
 			}
 		}
 		
@@ -57,6 +63,11 @@ public class MainScene extends BasicGameState {
 		*/
 		
 		for(Line line : ShapeDrawer.grid) {
+			if(line.getMinX() == TalesOfEvanusLauncher.width/2 || line.getMinY() == TalesOfEvanusLauncher.height/2) {
+				g.setColor(Color.green);
+			} else {
+				g.setColor(Color.white);
+			}
 			g.draw(line);
 		}
 		
@@ -64,16 +75,12 @@ public class MainScene extends BasicGameState {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int time) throws SlickException {
-		
+		InputManager.update();
 		Iterator<GameObject> gameObjectIterator = GameObject.GAMEOBJECTS.iterator();
-		
 		while(gameObjectIterator.hasNext()) {
-			
 			GameObject object = gameObjectIterator.next();
 			object.update();
-			
 		}
-		
 	}
 
 	@Override

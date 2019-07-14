@@ -9,7 +9,6 @@ public class Player extends GameObject {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
 		
 	}
 

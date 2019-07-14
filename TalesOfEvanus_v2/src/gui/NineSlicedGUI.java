@@ -8,6 +8,7 @@ import org.newdawn.slick.Renderable;
 
 import entities.GameObject;
 
+/* Creates a background given a width, height, xy coordinates, and background image */
 public class NineSlicedGUI extends GameObject {
 
 	public static final int TOP_LEFT = 0;
@@ -52,7 +53,9 @@ public class NineSlicedGUI extends GameObject {
 			
 			for(int row = 0; row < rows; row++) {
 				for(int col = 0; col < cols; col++) {
-					Slice slice = new Slice((int)((col * sliceWidth) - (x + (cols * sliceWidth))), (int) ((row * sliceHeight) - (y + (rows * sliceHeight))), getNineSliceTile(row, col));
+					int xo = (int) ((x - (cols * sliceWidth)/2) + (col * sliceWidth) + sliceWidth/2);
+					int yo = (int) ((y - (rows * sliceHeight)/2) + (row * sliceHeight) + sliceHeight/2);
+					Slice slice = new Slice(xo, yo, getNineSliceTile(row, col));
 					setOfSlices.add(slice);
 				}
 			}

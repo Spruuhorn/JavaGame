@@ -1,4 +1,5 @@
 /scene/
 /gui/
+/interfaces/
+/managers/
 /entities/
-/util/

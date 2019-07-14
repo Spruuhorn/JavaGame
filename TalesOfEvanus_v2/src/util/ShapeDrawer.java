@@ -11,23 +11,46 @@ public class ShapeDrawer {
 	
 	public static Set<Line> grid;
 	
-	private static final int UNITS = 100;
+	private static final int UNITS = 80;
 	
 	static {
 		
 		int width = TalesOfEvanusLauncher.width;
 		int height = TalesOfEvanusLauncher.height;
 		
+		int xo = width/2;
+		int yo = height/2;
+		
 		grid = new HashSet<>();
 		
-		for(int vert = 0; vert < width/UNITS; vert++) {
-			Line line = new Line(vert * UNITS, 0, vert * UNITS, height);
-			grid.add(line);
+		//Center Lines
+		Line line = new Line(0, yo, width, yo);
+		grid.add(line);
+		line = new Line(xo, 0, xo, height);
+		grid.add(line);
+		
+		//Horz Up
+		for(int horz = yo - UNITS; horz > 0; horz -= UNITS) {
+			Line l = new Line(0, horz, width, horz);
+			grid.add(l);
 		}
 		
-		for(int horz = 0; horz < height/UNITS; horz++) {
-			Line line = new Line(0, horz * UNITS, width, horz * UNITS);
-			grid.add(line);
+		//Vert Right
+		for(int vert = xo + UNITS; vert < width; vert += UNITS) {
+			Line l = new Line(vert, 0, vert, height);
+			grid.add(l);
+		}
+		
+		//Horz Down
+		for(int horz = yo + UNITS; horz < height; horz += UNITS) {
+			Line l = new Line(0, horz, width, horz);
+			grid.add(l);
+		}
+		
+		//Vert Left
+		for(int vert = xo - UNITS; vert > 0; vert -= UNITS) {
+			Line l = new Line(vert, 0, vert, height);
+			grid.add(l);
 		}
 	}
 }
