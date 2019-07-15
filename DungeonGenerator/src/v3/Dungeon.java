@@ -7,7 +7,7 @@ import java.util.Set;
 public class Dungeon {
 	
 	public static final String OPEN = "[O]";
-	public static final String WALL = "[W]";
+	public static final String WALL = "[ ]";
 	
 	private static final int UP = 0;
 	private static final int RIGHT = 1;
