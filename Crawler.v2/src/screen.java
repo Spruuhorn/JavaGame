@@ -8,6 +8,7 @@ import java.util.Scanner;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+
 public class screen extends JFrame {
     Enemy enemy;
     Inventory inv;

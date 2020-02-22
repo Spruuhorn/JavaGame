@@ -6,10 +6,14 @@ import java.util.Set;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Renderable;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
 import entities.Camera;
 import interfaces.Clickable;
+import interfaces.Drawable;
+import interfaces.Hoverable;
+import managers.AssetManager;
 
 public abstract class GameObject {
 	
@@ -18,7 +22,13 @@ public abstract class GameObject {
 	{ 
 		GAMEOBJECTS.add(this); 
 		if(this instanceof Clickable) {
-			System.out.println("Instance of clickable");
+			
+		}
+		if(this instanceof Drawable) {
+			
+		}
+		if(this instanceof Hoverable) {
+			
 		}
 	}
 	
@@ -26,7 +36,7 @@ public abstract class GameObject {
 	protected boolean active;
 	protected String name;
 	protected Shape collider;
-	protected Renderable sprite; 
+	protected Animation sprite; 
 	/* I made the sprite the interface Renderable because sprites are stored 
 	 * in the AssetManager as Renderable.
 	 */
@@ -37,15 +47,15 @@ public abstract class GameObject {
 		this.active = true;
 	}
 	
-	public GameObject(int x, int y, Renderable sprite) {
+	public GameObject(int x, int y, String sprite) {
 		this(x, y);
-		this.sprite = sprite;
+		this.sprite = AssetManager.sprites.get(sprite);
 	}
 	
-	public GameObject(int x, int y, Shape collider, Renderable sprite) {
+	public GameObject(int x, int y, boolean hitbox, String sprite) {
 		this(x, y);
-		this.collider = collider;
-		this.sprite = sprite;
+		this.sprite = AssetManager.sprites.get(sprite);
+		this.collider = new Rectangle(x, y, this.sprite.getWidth(), this.sprite.getHeight());
 	}
 	
 	public abstract void update();
@@ -77,6 +87,10 @@ public abstract class GameObject {
 	
 	public String getName() {
 		return name;
+	}
+	
+	public Shape getCollider() {
+		return collider;
 	}
 	
 	public void setXY(int x, int y) {

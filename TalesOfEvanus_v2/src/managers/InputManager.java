@@ -4,6 +4,7 @@ import org.newdawn.slick.Input;
 
 import entities.GameObject;
 import interfaces.Clickable;
+import util.ShapeDrawer;
 
 public class InputManager {
 	public static Input input;
@@ -11,8 +12,13 @@ public class InputManager {
 		input = i;
 	}
 	public static void update() {
-		if(input.isKeyPressed(Input.KEY_I)) {
-			
+		// Draw grid lines
+		if(input.isKeyPressed(Input.KEY_1)) {
+			ShapeDrawer.toggleGrid();
+		}
+		// Draw collider boxes
+		if(input.isKeyPressed(Input.KEY_2)) {
+			ShapeDrawer.toggleColliders();
 		}
 		if(input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 			mouseClick(input.getMouseX(), input.getMouseY());
@@ -22,6 +28,9 @@ public class InputManager {
 	private static void mouseClick(int x, int y) {
 		for(GameObject object : GameObject.GAMEOBJECTS) {
 			if(object instanceof Clickable) {
+				if(object.getCollider().contains(x, y)) {
+					((Clickable) object).onClick();
+				}
 			}
 		}
 	}

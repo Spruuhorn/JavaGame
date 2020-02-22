@@ -9,6 +9,9 @@ import scene.TalesOfEvanusLauncher;
 
 public class ShapeDrawer {
 	
+	public static boolean drawGrid = false;
+	public static boolean drawColliders = false;
+	
 	public static Set<Line> grid;
 	
 	private static final int UNITS = 80;
@@ -52,5 +55,13 @@ public class ShapeDrawer {
 			Line l = new Line(vert, 0, vert, height);
 			grid.add(l);
 		}
+	}
+	
+	public static void toggleGrid() {
+		drawGrid = !drawGrid;
+	}
+	
+	public static void toggleColliders() {
+		drawColliders = !drawColliders;
 	}
 }

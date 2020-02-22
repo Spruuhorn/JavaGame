@@ -32,7 +32,7 @@ public class NineSlicedGUI extends GameObject {
 	private class Slice extends GameObject {
 
 		public Slice(int x, int y, Image image) {
-			super(x, y, image);
+			super(x, y);
 		}
 		
 		@Override

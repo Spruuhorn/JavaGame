@@ -73,9 +73,7 @@ public class DialogueManager {
 						window.choices.add(button);
 						
 					}
-					
 					counter++;
-					
 				}
 				
 			}

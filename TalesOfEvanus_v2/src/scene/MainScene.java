@@ -34,8 +34,8 @@ public class MainScene extends BasicGameState {
 		//gc.setShowFPS(false);
 		Camera c = new Camera(0, 0, TalesOfEvanusLauncher.width, TalesOfEvanusLauncher.height);
 		//NineSlicedGUI gui = new NineSlicedGUI(0, 0, 235, 425, AssetManager.sprites.get("inventoryNineSlice"));
-		GameObject test = new BasicObject(0, 0, AssetManager.sprites.get("6PlayerRunLeft"));
-		//InventoryGUI invGUI = new InventoryGUI(0,0);
+		GameObject test = new BasicObject(0, 0, true, "GodBlessThisImage");
+		InventoryGUI invGUI = new InventoryGUI(0,0);
 		InputManager.create(gc.getInput());
 	}
 
@@ -45,6 +45,14 @@ public class MainScene extends BasicGameState {
 		for(GameObject object : GameObject.GAMEOBJECTS) {
 			if(object instanceof Drawable) {
 				((Drawable) object).onDraw();
+			}
+		}
+		
+		if(ShapeDrawer.drawColliders) {
+			for(GameObject object : GameObject.GAMEOBJECTS) {
+				if(object.isCollidable()) {
+					g.draw(object.getCollider());
+				}
 			}
 		}
 		
@@ -62,15 +70,16 @@ public class MainScene extends BasicGameState {
 		}
 		*/
 		
-		for(Line line : ShapeDrawer.grid) {
-			if(line.getMinX() == TalesOfEvanusLauncher.width/2 || line.getMinY() == TalesOfEvanusLauncher.height/2) {
-				g.setColor(Color.green);
-			} else {
-				g.setColor(Color.white);
+		if(ShapeDrawer.drawGrid) {
+			for(Line line : ShapeDrawer.grid) {
+				if(line.getMinX() == TalesOfEvanusLauncher.width/2 || line.getMinY() == TalesOfEvanusLauncher.height/2) {
+					g.setColor(Color.green);
+				} else {
+					g.setColor(Color.white);
+				}
+				g.draw(line);
 			}
-			g.draw(line);
 		}
-		
 	}
 
 	@Override
