@@ -8,7 +8,12 @@ import manager.GameManager;
 
 public class Physics {
 	
-	public static boolean APPLY = false;
+	private final static int UP = 0;
+	private final static int DOWN = 1;
+	private final static int LEFT = 2;
+	private final static int RIGHT = 3;
+	
+	public static boolean APPLY = true;
 	public static float TERMINAL_VELOCITY = -50f;
 	public static float GRAVITY_ACCELERATION = -0.8f;
 	
@@ -79,23 +84,37 @@ public class Physics {
 					collider.accelerateY(GRAVITY_ACCELERATION);
 				}
 				
-				float lower = collider.getY();
-				float upper = collider.getY() + collider.getHeight();
-				float right = collider.getX() + collider.getWidth();
-				float left = collider.getX();
-				
-				collider.move();
+				collider.castRays();
 				
 				for(GameObject otherObject : GameManager.getGameObjects()) {
 					Collider otherCollider = otherObject.getCollider();
 					
 					if(!object.equals(otherObject)) {
 						
-						float otherLower = otherCollider.getY();
-						float otherUpper = otherCollider.getY() + otherCollider.getHeight();
-						float otherRight = otherCollider.getX() + otherCollider.getHeight();
-						float otherLeft = otherCollider.getX();
+						boolean[] collisions = collider.rayCollision(otherCollider);
 						
+						if(collisions[UP]) {
+							collider.setVelocityY(0);
+							collider.setY(otherCollider.getY() - collider.getHeight());
+						}
+						
+						if(collisions[DOWN]) {
+							collider.setVelocityY(0);
+							collider.setY(otherCollider.getY() + otherCollider.getHeight());
+							collider.setGrounded(true);
+						}
+						
+						if(collisions[LEFT]) {
+							collider.setVelocityX(0);
+							collider.setX(otherCollider.getX() + otherCollider.getWidth());
+						}
+						
+						if(collisions[RIGHT]) {
+							collider.setVelocityX(0);
+							collider.setX(otherCollider.getX() - collider.getWidth());
+						}
+						
+						/*
 						if(collider.betterCollides(otherCollider)) {
 							
 							if (collider.getVelocityY() < 0) {
@@ -112,7 +131,7 @@ public class Physics {
 							if (collider.getVelocityX() > 0) {
 								System.out.println("RIGHT");
 							}
-							/*
+							
 							// if right side collision else if left side collision
 							if(collider.getLastX() < otherCollider.getX() + otherCollider.getWidth()/2) {
 								//collider.translateX(otherLeft - right);
@@ -130,7 +149,6 @@ public class Physics {
 								//collider.translateY(otherUpper - lower);
 								System.out.println("BOT");
 							}
-							*/
 							
 							collider.setVelocityY(0);
 							collider.setGrounded(true);
@@ -139,6 +157,8 @@ public class Physics {
 						} else {
 							otherCollider.setColor(Color.GREEN);
 						}
+						*/
+						
 						/*
 						// Scanning horizontal
 						for(int i = 1; i <= 1 + deltaX; i++) {
@@ -182,25 +202,10 @@ public class Physics {
 						*/
 					}
 				}
+				if(!colliding)
+					collider.move();
 				
-				// Update movements with collision info
-				// GRAVITY
-				
-				/*
-				if(!canMoveX) {
-					collider.setVelocityX(0);
-				}
-				
-				if(!canMoveY) {
-					collider.setVelocityY(0);
-				}
-				*/
-				
-				if (colliding) {
-					collider.setColor(Color.RED);
-				} else {
-					collider.setColor(Color.GREEN);
-				}
+				collider.setColor(colliding? Color.RED : Color.GREEN);
 			}
 		}
 	}

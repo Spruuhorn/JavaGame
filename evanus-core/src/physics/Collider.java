@@ -2,6 +2,7 @@ package physics;
 import com.badlogic.gdx.graphics.Color;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import tosco.evanus.GameObject;
 
@@ -11,6 +12,16 @@ public class Collider {
 		
 	}
 	
+	// Number of rays to cast
+	private final static int RAYS = 4;
+	private final static int X = 0;
+	private final static int Y = 1;
+	
+	private final static int UP = 0;
+	private final static int DOWN = 1;
+	private final static int LEFT = 2;
+	private final static int RIGHT = 3;
+	
 	public static final int STATIC = 0;
 	public static final int DYNAMIC_SOLID = 1;
 	public static final int DYNAMIC = 2;
@@ -18,7 +29,8 @@ public class Collider {
 	
 	private GameObject gameObject;
 	private Rectangle hitbox;
-	private float[] raysX, raysY;
+	private float[][] vertRays, horzRays;
+	private float vertRaysY, horzRaysX;
 	private float lastX, lastY;
 	private float hv, vv;
 	private int type;
@@ -36,8 +48,8 @@ public class Collider {
 		hitbox = new Rectangle(x, y, width, height);
 		this.lastX = hitbox.x;
 		this.lastY = hitbox.y;
-		this.raysX = new float[4];
-		this.raysY = new float[4];
+		this.horzRays = new float[RAYS][2];
+		this.vertRays = new float[RAYS][2];
 	}
 	
 	/* NOTE: Do not modify the values of 'other' */
@@ -57,6 +69,30 @@ public class Collider {
 		
 	}
 	
+	public boolean[] rayCollision(Collider other) {
+		
+		boolean[] collisions = {false,false,false,false};
+		
+		// check horizontal collisions
+		if(hv != 0) {
+			for(int ray = 1; ray < RAYS - 1; ray++) {
+				if(Intersector.intersectSegmentRectangle(horzRaysX, horzRays[ray][Y], horzRays[ray][X], horzRays[ray][Y], other.getHitbox())) {
+					collisions[hv > 0? RIGHT : LEFT] = true;
+				}
+			}
+		}
+		
+		// check vertical collisions
+		if(vv != 0) {
+			for(int ray = 1; ray < RAYS - 1; ray++) {
+				if(Intersector.intersectSegmentRectangle(vertRays[ray][X], vertRaysY, vertRays[ray][X], vertRays[ray][Y], other.getHitbox())) {
+					collisions[vv > 0? UP : DOWN] = true;
+				}
+			}
+		}
+		return collisions;
+	}
+	
 	public boolean collides(Collider other) {
 		return hitbox.overlaps(other.getHitbox());
 	}
@@ -73,12 +109,27 @@ public class Collider {
 		float otherRight = other.getX() + other.getHeight();
 		float otherLeft = other.getX();
 		
-		//this/other
-		if (lower < otherUpper && left < otherRight && right > otherLeft && upper > otherLower) {
-			//translateY(otherUpper - lower);
-			return true;
+		return lower < otherUpper && left < otherRight && right > otherLeft && upper > otherLower;
+	}
+	
+	public void castRays() {
+		horzRaysX = (hv > 0? hitbox.x + hitbox.width : hitbox.x);
+		vertRaysY = (vv > 0? hitbox.y + hitbox.height : hitbox.y);
+		
+		float dx = hitbox.width/(RAYS - 1);
+		float dy = hitbox.height/(RAYS - 1);
+		
+		// cast horizontal rays
+		for(int ray = 0; ray < RAYS; ray++) {
+			horzRays[ray][X] = horzRaysX + hv;
+			horzRays[ray][Y] = hitbox.y + (ray * dy);
 		}
-		return false;
+		
+		//cast vertical rays
+		for(int ray = 0; ray < RAYS; ray++) {
+			vertRays[ray][X] = hitbox.x + (ray * dx);
+			vertRays[ray][Y] = vertRaysY + vv;
+		}
 	}
 
 	public Rectangle getHitbox() {
@@ -140,6 +191,16 @@ public class Collider {
 	public void draw(ShapeRenderer renderer) {
 		renderer.setColor(color);
 		renderer.rect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
+		
+		if(type == DYNAMIC) {
+			for(int ray = 0; ray < RAYS; ray++) {
+				renderer.line(vertRays[ray][X], vertRaysY, vertRays[ray][X], vertRays[ray][Y]);
+			}
+			for(int ray = 0; ray < RAYS; ray++) {
+				renderer.line(horzRaysX, horzRays[ray][Y], horzRays[ray][X], horzRays[ray][Y]);
+			}
+		}
+		
 	}
 	
 	public void move() {

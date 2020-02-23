@@ -66,7 +66,7 @@ public class EvanusLauncher extends ApplicationAdapter {
 		
 		Gdx.input.setInputProcessor(new InputManager());
 		
-		player = new Player(128, 128, new Texture("PlayerRunLeft.png"));
+		player = new Player(128, 256, new Texture("PlayerRunLeft.png"));
 		
 		Texture t = new Texture("flowers.png");
 		for(int row = 0; row < tmap.length; row++) {
