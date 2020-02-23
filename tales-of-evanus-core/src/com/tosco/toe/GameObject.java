@@ -32,7 +32,7 @@ public abstract class GameObject implements Clickable, Hoverable {
 	}
 	
 	public void generateCollider(float width, float height, int type) {
-		collider = new Collider(x, y, width, height, this, type);
+		collider = new Collider(x - width/2, y - height/2, width, height, this, type);
 	}
 	
 	public float getX() {
@@ -70,5 +70,10 @@ public abstract class GameObject implements Clickable, Hoverable {
 	
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+	
+	public void move() {
+		x = collider.getX() + collider.getWidth()/2;
+		y = collider.getY() + collider.getHeight()/2;
 	}
 }

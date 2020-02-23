@@ -2,9 +2,8 @@ package com.tosco.toe;
 
 import com.badlogic.gdx.ApplicationAdapter;
 
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -43,7 +42,11 @@ public class TalesOfEvanusMain extends ApplicationAdapter {
 	private GameMap map;
 	
 	private Player player;
-	private Entity fake1, fake2, fake3;
+	
+	private int[][] tmap = {{1,1,1,1,1,1,1,1,1,1},
+							{0,0,0,0,0,0,0,0,0,1},
+							{0,1,1,0,0,0,0,0,0,0},
+							{0,0,1,1,1,1,1,1,1,0}};
 	
 	@Override
 	public void create () {
@@ -63,12 +66,15 @@ public class TalesOfEvanusMain extends ApplicationAdapter {
 		
 		Gdx.input.setInputProcessor(new InputManager());
 		
-		player = new Player(0, 128, new Texture("PlayerRunLeft.png"));
+		player = new Player(128, 128, new Texture("PlayerRunLeft.png"));
 		
-		// does not have a collider and collider is never created
-		fake1 = new StaticEntity(0, 0, new Texture("flowers.png"), "Dummy");
-		fake1 = new StaticEntity(64, 0, new Texture("flowers.png"), "Dummy");
-		fake1 = new StaticEntity(64, 200, new Texture("flowers.png"), "Dummy");
+		Texture t = new Texture("flowers.png");
+		for(int row = 0; row < tmap.length; row++) {
+			for(int col = 0; col <tmap[0].length; col++) {
+				if(tmap[row][col] == 1)
+					new StaticEntity(col * 64, row * 64, t);
+			}
+		}
 		
 		GameManager.setPlayer(player);
 	}
@@ -82,31 +88,30 @@ public class TalesOfEvanusMain extends ApplicationAdapter {
 		Gdx.gl.glClearColor(0f, .1f, .33f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		
-		// Game Map render
-		//gameManager.getCurrentMap().render(camera);
-		
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		
-		
-		Physics.update();
-		
-		for(GameObject gameObject : GameManager.getGameObjects()) {
-			if(gameObject.isActive()) {
-				if(gameObject instanceof Entity) {
-					((Entity) gameObject).draw(batch, camera);
-				}
-				if(gameObject instanceof Updateable) {
-					((Updateable) gameObject).update();
-				}
-			}
-		}
 		
 		camera.position.set(player.x, player.y, 0);
 		camera.update();
 		
-		//gameManager.getCurrentMap().checkEntityCollision(p);
+		
+		// The collider/image lag behind one another, this didnt happen before because
+		// I would update the rectangle and draw the image in the same draw call
+		
+		// Apply gravity - check collisions - move colliders back on collision - move game object to collider
+		Physics.update();
+		
+		for(GameObject gameObject : GameManager.getGameObjects()) {
+			if(gameObject.isActive()) {
+				if(gameObject instanceof Updateable) {
+					((Updateable) gameObject).update();
+				}
+				if(gameObject instanceof Entity) {
+					((Entity) gameObject).draw(batch, camera);
+				}
+				gameObject.move();
+			}
+		}
 		
 		batch.end();
 		
@@ -122,9 +127,8 @@ public class TalesOfEvanusMain extends ApplicationAdapter {
 		
 		// Draw rectangles ---DEBUGGING---
 		if(debug) {
+			shapeRenderer.setProjectionMatrix(camera.combined);
 			shapeRenderer.begin(ShapeType.Line);
-			shapeRenderer.setColor(Color.GREEN);
-			shapeRenderer.rect(Physics.RECT_TEST.x, Physics.RECT_TEST.y, Physics.RECT_TEST.width, Physics.RECT_TEST.height);
 			for(GameObject gameObject : GameManager.getGameObjects()) {
 				if(gameObject.isActive()) {
 					gameObject.getCollider().draw(shapeRenderer);
@@ -145,6 +149,7 @@ public class TalesOfEvanusMain extends ApplicationAdapter {
 			camera.translate(-Gdx.input.getDeltaX(), Gdx.input.getDeltaY());
 			camera.update();
 		}
+		*/
 		if (Gdx.input.isKeyPressed(Keys.LEFT)) {
 			camera.viewportWidth *= 1.1;
 			camera.viewportHeight *= 1.1;
@@ -153,12 +158,12 @@ public class TalesOfEvanusMain extends ApplicationAdapter {
 			camera.viewportWidth /= 1.1;
 			camera.viewportHeight /= 1.1;
 		}
-		*/
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
+		HUDBatch.dispose();
 	}
 	
 }

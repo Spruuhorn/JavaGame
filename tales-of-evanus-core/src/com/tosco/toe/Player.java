@@ -6,18 +6,19 @@ import com.badlogic.gdx.graphics.Texture;
 
 import interfaces.Updateable;
 import physics.Collider;
+import physics.Physics;
 
 public class Player extends AnimatedEntity implements Updateable {
 
 	private final static String name = "Player";
 	
 	private InventoryHUD inventoryHud;
-	private float speed = 3;
-	private float jump = 5;
+	private float speed = 4;
+	private float jump = 12;
 	
 	public Player(float x, float y, Texture sheet) {
 		super(x, y, sheet, name);
-		generateCollider(60, 32, Collider.DYNAMIC);
+		generateCollider(32, 64, Collider.DYNAMIC);
 		//inventoryHud = new InventoryHUD(5, 6, new Texture("nineslice2.png"));
 		//inventoryHud.setActive(false);
 	}
@@ -33,8 +34,19 @@ public class Player extends AnimatedEntity implements Updateable {
 			collider.setVelocityX(0);
 		}
 		
-		if(Gdx.input.isKeyPressed(Keys.W) && collider.isGrounded()) {
-			collider.setVelocityY(jump);
+		if(Physics.APPLY) {
+			if(Gdx.input.isKeyPressed(Keys.W) && collider.isGrounded()) {
+				collider.setVelocityY(jump);
+				collider.setGrounded(false);
+			}
+		} else {
+			if(Gdx.input.isKeyPressed(Keys.W)) {
+				collider.setVelocityY(speed);
+			} else if(Gdx.input.isKeyPressed(Keys.S)) {
+				collider.setVelocityY(-speed);
+			} else {
+				collider.setVelocityY(0);
+			}
 		}
 			
 		if(Gdx.input.isKeyJustPressed(Keys.I)) {
