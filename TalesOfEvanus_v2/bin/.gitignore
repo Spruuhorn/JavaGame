@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 /entities/
 /gui/
 /interfaces/
 /managers/
 /scene/
+=======
+/scene/
+/interfaces/
+/managers/
+>>>>>>> branch 'master' of https://github.com/Spruuhorn/TheFunBox.git
 /util/
